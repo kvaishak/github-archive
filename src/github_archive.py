@@ -44,7 +44,7 @@ class Archive():
         if not os.path.exists(path):
             try:
                 git = subprocess.check_output(
-                    f'git clone --branch={Archive.BRANCH} {repo.ssh_url} {path}',
+                    f'git clone --branch={Archive.BRANCH} https://github.com/{repo.full_name}.git {path}',
                     stdin=None, stderr=None, shell=True, timeout=int(Archive.GIT_TIMEOUT))
                 data = f'{repo.name}\n{git.decode("UTF-8")}'
                 print(data)
