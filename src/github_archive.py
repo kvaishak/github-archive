@@ -20,7 +20,7 @@ class Archive():
     USER_REPOS = USER.get_user().get_repos()
     USER_GISTS = USER.get_user().get_gists()
     BUFFER = 0.1  # Buffer time in between each request
-    GIT_TIMEOUT = 120  # Number of seconds before a git operation will timeout
+    GIT_TIMEOUT = 1200  # Number of seconds before a git operation will timeout
 
     # Configuration Variables
     LOCATION = os.path.expanduser(os.getenv('LOCATION'))
@@ -247,11 +247,11 @@ class Archive():
             Archive.logs(data)
 
         # Clean up logs before finishing)
-        for root, dirs, files in os.walk(Archive.LOG_PATH):  # pylint: disable=W0612
-            for file in files:
-                if file.mtime < Archive.LOG_LIFE:
-                    os.remove(file)
-                    print('Logs cleaned up')
+        # for root, dirs, files in os.walk(Archive.LOG_PATH):  # pylint: disable=W0612
+        #     for file in files:
+        #         if file.mtime < Archive.LOG_LIFE:
+        #             os.remove(file)
+        #             print('Logs cleaned up')
 
         # TODO: Use threading.wait to check if all processes are finished
         time.sleep(6)
